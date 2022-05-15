@@ -33,7 +33,7 @@ openssl base64 < your_signing_keystore.jks | tr -d '\n' | tee your_signing_keyst
 2. Create a secret that is called `SIGNING_STORE_PASSWORD` and contains your KeyStore password.
 3. Create one that is called `SIGNING_KEY_PASSWORD` and contains your key alias password.
 4. The last secret we need to add is called `SIGNING_KEY_ALIAS` and should contain the alias of your app.
-
+5. Go to the Github project settings > Actions > General, under the Workflow permissions select the Read and write permissions option and click the save button.
 ---
 
 ## About the elimu.ai Community
