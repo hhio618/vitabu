@@ -23,6 +23,16 @@ Install APK:
 ```
 adb install app/build/outputs/apk/debug/ai.elimu.vitabu-<versionCode>-debug.apk
 ```
+## Build signed APK using Github actions
+Convert Your Signing Keystore to a base64 text:
+```
+openssl base64 < your_signing_keystore.jks | tr -d '\n' | tee your_signing_keystore_base64_encoded.txt
+```
+### Steps
+1. Add a new GitHub Secret called `KEYSTORE`. copy the content from the your_signing_keystore_base64_encoded.txt file and paste it into the value field.
+2. Create a secret that is called `SIGNING_STORE_PASSWORD` and contains your KeyStore password.
+3. Create one that is called `SIGNING_KEY_PASSWORD` and contains your key alias password.
+4. The last secret we need to add is called `SIGNING_KEY_ALIAS` and should contain the alias of your app.
 
 ---
 
