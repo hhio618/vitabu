@@ -66,7 +66,7 @@ dependencies {
 task releaseClean {
     doLast {
         if (!grgit.repository.jgit.status().call().clean) {
-            throw new GradleException('Git status is not clean')
+            throw new GradleException('Git status is not clean, please commit or stash your changes!')
         }
     }
 }
@@ -87,7 +87,7 @@ task releasePrepare(dependsOn: releaseClean) {
         def newVersionName
         if (project.properties.containsKey("version")){
             newVersionName = project.properties["version"]
-        }else {
+        }else if (project.properties.containsKey("type")) {
             def (major, minor, patch) = versionName.tokenize('.')
             switch (type) {
                 case "major":
@@ -103,6 +103,8 @@ task releasePrepare(dependsOn: releaseClean) {
                     break
             }
             newVersionName = "$major.$minor.$patch"
+        }else{
+            throw new GradleException('Either type or version parameters should be provided')
         }
 
         def newVersionCode = versionCode + 1
